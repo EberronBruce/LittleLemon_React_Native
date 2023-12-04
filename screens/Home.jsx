@@ -13,19 +13,19 @@ export default function Home() {
     // })
 
     useEffect(() => {
-				const backAction = () => {
-					// Prevent default behavior of the back button
-                    BackHandler.exitApp(); 
-					return true;
-				};
+        const backAction = () => {
+            // Prevent default behavior of the back button
+            BackHandler.exitApp(); 
+            return true;
+        };
 
-				const backHandler = BackHandler.addEventListener(
-					"hardwareBackPress",
-					backAction
-				);
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
 
-				return () => backHandler.remove(); // Clean up the event listener when component unmounts
-			}, []);
+        return () => backHandler.remove(); // Clean up the event listener when component unmounts
+    }, []);
 
     const navigation = useNavigation();
 
