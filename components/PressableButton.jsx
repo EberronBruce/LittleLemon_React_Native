@@ -1,26 +1,43 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, Platform } from "react-native";
+import { HIGHLIGHT_LIGHT_COLOR, LIGHT_GRAY_COLOR, PRIMARY_GREEN_COLOR, PRIMARY_YELLOW_COLOR } from "../utils";
 
-const PressableButton = ({ onPress, children, disabled }) => {
-const [isPressed, setIsPressed] = useState(false);
+const PressableButton = ({
+	onPress,
+	children,
+	disabled,
+	backgroundColor = PRIMARY_GREEN_COLOR,
+	pressedColor = PRIMARY_YELLOW_COLOR,
+	disabledColor = LIGHT_GRAY_COLOR,
+	textColor = HIGHLIGHT_LIGHT_COLOR,
+	fontWeight = "medium",
+	borderWidth = 0,
+	borderColor = "black",
+}) => {
+	const [isPressed, setIsPressed] = useState(false);
 
-const handlePressIn = () => {
-	if (Platform.OS === "ios" && !disabled) {
-		setIsPressed(true);
-	}
-};
+	const handlePressIn = () => {
+		if (Platform.OS === "ios" && !disabled) {
+			setIsPressed(true);
+		}
+	};
 
-const handlePressOut = () => {
-	if (Platform.OS === "ios" && !disabled) {
-		setIsPressed(false);
-	}
-};
+	const handlePressOut = () => {
+		if (Platform.OS === "ios" && !disabled) {
+			setIsPressed(false);
+		}
+	};
 
-const buttonStyles = [
-	styles.button,
-	isPressed && Platform.OS === "ios" && !disabled && styles.buttonPressed,
-	disabled && styles.disabled,
-];
+	const buttonStyles = [
+		styles.button,
+		{ backgroundColor, borderWidth, borderColor },
+		isPressed &&
+			Platform.OS === "ios" &&
+			!disabled && { backgroundColor: pressedColor },
+		disabled && { backgroundColor: disabledColor, opacity: 0.5 },
+	];
+
+	const textStyles = [styles.buttonText, { color: textColor, fontWeight }];
 
 	return (
 		<Pressable
@@ -29,32 +46,23 @@ const buttonStyles = [
 			disabled={disabled}
 			onPressIn={handlePressIn}
 			onPressOut={handlePressOut}
-			android_ripple={{ color: "#F4CE14" }}
+			android_ripple={{ color: pressedColor }}
 		>
-			<Text style={styles.buttonText}>{children}</Text>
+			<Text style={textStyles}>{children}</Text>
 		</Pressable>
 	);
 };
 
 const styles = StyleSheet.create({
 	button: {
-		backgroundColor: "#495E57",
 		padding: 10,
 		justifyContent: "center",
 		borderRadius: 10,
 		flexDirection: "row",
 	},
-	buttonPressed: {
-		backgroundColor: "#F4CE14",
-	},
-	disabled: {
-		backgroundColor: "#777777",
-		opacity: 0.5,
-	},
 	buttonText: {
 		fontSize: 16,
 		textAlign: "center",
-		color: "#EEFFEE",
 	},
 });
 
