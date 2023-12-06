@@ -3,25 +3,23 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import {PILL_GRAY_COLOR,} from "../utils/colors";
 import PillButton from "../components/PillButton.jsx";
 
-const categories = ["Starters", "Mains", "Desserts", "Drinks"];
 
-export default function CategoryContainer() {
+export default function CategoryContainer({categories}) {
 	return (
-        <View style={styles.categoryContainer}>
-            <Text style={styles.categoryTitle}>ORDER FOR DELIVERY!</Text>
-            <ScrollView horizontal style={styles.scrollViewContainer}>
-                {categories.map((category) => (
-                    <PillButton
-                        style={styles.pillButton}
-                        key={category}
-                        name={category}
-                        onPress={() => console.log(category)}
-                    >
-                        {category}
-                    </PillButton>
-                ))}
-            </ScrollView>
-        </View>
+		<View style={styles.categoryContainer}>
+			<Text style={styles.categoryTitle}>ORDER FOR DELIVERY!</Text>
+			<ScrollView horizontal style={styles.scrollViewContainer}>
+				{categories.map((category) => (
+					<PillButton
+						key={category}
+						name={category}
+						onPress={() => console.log(category)}
+					>
+						{category[0].toUpperCase() + category.slice(1)}
+					</PillButton>
+				))}
+			</ScrollView>
+		</View>
 	);
 }
 
@@ -39,6 +37,6 @@ const styles = StyleSheet.create({
 	},
 	scrollViewContainer: {
 		marginHorizontal: 10,
-		padding: 20,
+		paddingVertical: 20,
 	},
 });
