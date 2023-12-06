@@ -25,7 +25,7 @@ export const createTable = async () => {
         }
     }
 
-export const fetchAllMenuItems= () => {
+export const fetchAllMenuItems = () => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM menu", [], (_, { rows }) => {
@@ -52,3 +52,79 @@ export const insertMenuItems = (menuItems) => {
         console.error("Error in insertMenu menu", error);
     }
 }
+
+export const fetchAllCategories = () => {
+	return new Promise((resolve, reject) => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				"SELECT category FROM menu",
+				[],
+				(_, { rows }) => {
+					const menuItems = rows._array;
+					resolve(menuItems);
+				},
+				(_, error) => {
+					reject(error);
+				}
+			);
+		});
+	});
+};
+
+export const fetchAllMenuItemsByCategories = (categories, searchText) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `SELECT * FROM menu WHERE category IN (${categories
+                    .map(() => "?")
+                    .join(",")})`,
+                categories,
+                (_, { rows }) => {
+                    const menuItems = rows._array;
+                    resolve(menuItems);
+                },
+                (_, error) => {
+                    reject(error);
+                }
+            );
+        });
+    });
+}
+
+export const fetchAllMenuItemsByCategoriesAndSearch = (categories, searchText) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `SELECT * FROM menu WHERE category IN (${categories
+                    .map(() => "?")
+                    .join(",")}) AND name LIKE '%' || ? || '%'`,
+                [...categories, searchText], // categories,
+                (_, { rows }) => {
+                    const menuItems = rows._array;
+                    resolve(menuItems);
+                },
+                (_, error) => {
+                    reject(error);
+                }
+            );
+        });
+    });
+}
+
+export const fetchAllMenuItemsBySearch = (searchText) => {
+	return new Promise((resolve, reject) => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				`SELECT * FROM menu WHERE name LIKE '%' || ? || '%'`,
+				[searchText],
+				(_, { rows }) => {
+					const menuItems = rows._array;
+					resolve(menuItems);
+				},
+				(_, error) => {
+					reject(error);
+				}
+			);
+		});
+	});
+};

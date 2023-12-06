@@ -2,9 +2,25 @@ import { React, useState } from "react";
 import { View, Text, StyleSheet, Image, Platform, } from "react-native";
 import { Input, Icon } from "react-native-elements";
 import { PRIMARY_GREEN_COLOR, PRIMARY_YELLOW_COLOR, OFF_WHITE_COLOR,} from "../utils/colors";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchPhrase } from "../state/actions";
+import { debounce } from "lodash";
+
+// Define the debounce delay
+const debounceDelay = 500;
+// Define the debounced search function
+const debouncedSearch = debounce((text, dispatch) => {
+    dispatch(setSearchPhrase(text.trim()));
+}, debounceDelay);
 
 export default function HeroContainer() {
-	const [searchPhrase, setSearchPhrase] = useState("");
+	//const [searchPhrase, setSearchPhrase] = useState("");
+	const searchText = useSelector((state) => state.profile.search);
+	const dispatch = useDispatch();
+
+	const handleTextChange = (text) => {
+		debouncedSearch(text, dispatch);
+	};
 
 	return (
         <View style={styles.heroContainer}>
@@ -29,8 +45,8 @@ export default function HeroContainer() {
                     leftIcon={<Icon name="search" type="font-awesome" />}
                     containerStyle={styles.inputContainer}
                     inputContainerStyle={styles.inputField}
-                    value={searchPhrase}
-                    onChangeText={(text) => setSearchPhrase(text.trim())}
+                    value={searchText}
+                    onChangeText={(text) => dispatch(setSearchPhrase(text.trim()))}
                     keyboardType="email-address"
                     textContentType="emailAddress"
                     placeholder={"Type your email"}
@@ -42,10 +58,11 @@ export default function HeroContainer() {
 
 const styles = StyleSheet.create({
 	heroContainer: {
-        flex: Platform.select({
-            ios: 0.8,
-            android: 1.05
-        }),
+        // flex: Platform.select({
+        //     ios: 0.8,
+        //     android: 1.05
+        // }),
+
 
 		backgroundColor: PRIMARY_GREEN_COLOR,
 		padding: 20,
