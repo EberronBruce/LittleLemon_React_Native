@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, Platform } from "react-native";
-import { HIGHLIGHT_LIGHT_COLOR, LIGHT_GRAY_COLOR, PRIMARY_GREEN_COLOR, PRIMARY_YELLOW_COLOR } from "../utils";
+import { HIGHLIGHT_LIGHT_COLOR, LIGHT_GRAY_COLOR, PRIMARY_GREEN_COLOR, PRIMARY_YELLOW_COLOR } from "../utils/colors";
 
 const PressableButton = ({
 	onPress,

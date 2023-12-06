@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {KEY_ISLOGIN,} from "../utils/storageKeys";
 
 import ProfileButton from "../components/ProfileButton";
 import LogoHeaderTitle from "../components/LogoHeaderTitle";
@@ -20,7 +21,7 @@ export default function AppContainer() {
 		SplashScreen.preventAutoHideAsync(); // Prevent the splash screen from automatically hiding
 
 		// Check if onboarding is completed in AsyncStorage
-		AsyncStorage.getItem("isLogin")
+		AsyncStorage.getItem(KEY_ISLOGIN)
 			.then((value) => {
 				setIsLogin(value === "true"); // Convert string value to boolean
 			})
@@ -40,17 +41,17 @@ export default function AppContainer() {
 						{!isLogin && (
 							<Stack.Screen name="Onboarding" component={Onboarding} />
 						)}
-						{/* <Stack.Screen
+						<Stack.Screen
 							name="Home"
 							component={Home}
 							options={{
 								headerShown: true,
 								headerBackVisible: false,
 								headerTitle: LogoHeaderTitle,
-								headerRight: () => <ProfileButton />,
+								headerRight: () => <ProfileButton/>,
 								headerTitleAlign: "center",
 							}}
-						/> */}
+						/>
 						<Stack.Screen
 							name="Profile"
 							component={Profile}

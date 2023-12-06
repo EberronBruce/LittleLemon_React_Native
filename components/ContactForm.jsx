@@ -1,29 +1,5 @@
-import { React, useEffect, useState } from "react";
-import {
-	View,
-	Text,
-	Image,
-	StyleSheet,
-	TextInput,
-	ActivityIndicator,
-} from "react-native";
-import PressableButton from "../components/PressableButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-	PRIMARY_GREEN_COLOR,
-	HIGHLIGHT_DARK_COLOR,
-	HIGHLIGHT_LIGHT_COLOR,
-	PRIMARY_YELLOW_COLOR,
-	SECONDARY_LIGHT_COLOR,
-	SECONDARY_DARK_COLOR,
-	validateEmail,
-	validateName,
-	KEY_ISLOGIN,
-	KEY_FIRST_NAME,
-	KEY_LAST_NAME,
-	KEY_EMAIL,
-	KEY_PHONE,
-} from "../utils";
+import { React} from "react";
+import { View, Text, TextInput, } from "react-native";
 import { inputStyles } from "../Styles.js";
 import { MaskedTextInput } from "react-native-mask-text";
 
@@ -89,39 +65,3 @@ export default function ContactForm({
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flexGrow: 1,
-		justifyContent: "flex-start",
-		paddingHorizontal: 20,
-		paddingTop: 8,
-	},
-	pictureInfoContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "flex-start",
-	},
-	title: {
-		fontSize: 16,
-		fontWeight: "bold",
-		alignSelf: "center",
-	},
-	avatarContainer: {
-		flexDirection: "column",
-	},
-	avatar: {
-		width: 100,
-		height: 100,
-		borderRadius: 50,
-		resizeMode: "contain",
-	},
-	buttonSpacing: {
-		marginStart: "5%",
-		marginTop: "3%",
-	},
-	avatarText: {
-		fontSize: 10,
-		fontWeight: "300",
-	},
-});

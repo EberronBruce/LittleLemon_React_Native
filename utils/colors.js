@@ -1,0 +1,9 @@
+export const PRIMARY_GREEN_COLOR = "#495E57";
+export const PRIMARY_YELLOW_COLOR = "#F4CE14";
+export const SECONDARY_DARK_COLOR = "#EE9972";
+export const SECONDARY_LIGHT_COLOR = "#FBDABB";
+export const HIGHLIGHT_DARK_COLOR = "#333333";
+export const HIGHLIGHT_LIGHT_COLOR = "#EEFFEE";
+export const LIGHT_GRAY_COLOR = "#777777";
+export const OFF_WHITE_COLOR = "#FEFFFE";
+export const PILL_GRAY_COLOR = "#E2E2E2"
