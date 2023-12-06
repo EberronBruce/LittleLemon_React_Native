@@ -7,28 +7,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { receiveImage } from "../state/actions";
 import { useNavigation } from "@react-navigation/native";
 import {
-    PRIMARY_GREEN_COLOR,
-	HIGHLIGHT_DARK_COLOR,
-	HIGHLIGHT_LIGHT_COLOR,
-	PRIMARY_YELLOW_COLOR,
-	SECONDARY_LIGHT_COLOR,
-	SECONDARY_DARK_COLOR,
-    LIGHT_GRAY_COLOR,
-    OFF_WHITE_COLOR,
 	validateEmail,
 	validateName,
-    KEY_ISLOGIN,
-    KEY_FIRST_NAME,
-    KEY_LAST_NAME,
-    KEY_EMAIL,
-    KEY_PHONE,
-    KEY_IMAGE_URI,
     saveChanges,
     isValidPhoneNumber,
-    KEY_OFFERS,
-    KEY_NEWSLETTER
-} from "../utils";
-import {inputStyles } from "../Styles.js";
+} from "../utils/helpers.js";
+import {
+	KEY_FIRST_NAME,
+	KEY_LAST_NAME,
+	KEY_EMAIL,
+	KEY_PHONE,
+	KEY_IMAGE_URI,
+	KEY_OFFERS,
+	KEY_NEWSLETTER,
+} from "../utils/storageKeys.js";
+import {
+	PRIMARY_GREEN_COLOR,
+	HIGHLIGHT_DARK_COLOR,
+	PRIMARY_YELLOW_COLOR,
+	LIGHT_GRAY_COLOR,
+} from "../utils/colors";
+
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AvatarContainer from "../components/AvatarContainer";
 import ContactForm from '../components/ContactForm.jsx';
@@ -65,10 +64,6 @@ export default function Profile() {
     const [imageUri, setImageUri] = useState(null);
 	const dispatch = useDispatch();
 	const navigation = useNavigation();
-
-    const isEmailValid = validateEmail(email);
-    const isFirstNameValid = validateName(firstName);
-    const isLastNameValid = validateName(lastName);
 
 
     useEffect(() => {

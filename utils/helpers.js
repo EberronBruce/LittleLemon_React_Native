@@ -1,23 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const PRIMARY_GREEN_COLOR = "#495E57";
-export const PRIMARY_YELLOW_COLOR = "#F4CE14";
-export const SECONDARY_DARK_COLOR = "#EE9972";
-export const SECONDARY_LIGHT_COLOR = "#FBDABB";
-export const HIGHLIGHT_DARK_COLOR = "#333333";
-export const HIGHLIGHT_LIGHT_COLOR = "#EEFFEE";
-export const LIGHT_GRAY_COLOR = "#777777";
-export const OFF_WHITE_COLOR = "#FEFFFE";
-
-export const KEY_FIRST_NAME = "firstName";
-export const KEY_LAST_NAME = "lastName";
-export const KEY_EMAIL = "email";
-export const KEY_PHONE = "phone";
-export const KEY_ISLOGIN = "isLogin";
-export const KEY_IMAGE_URI = "imageUri";
-export const KEY_OFFERS = "offers";
-export const KEY_NEWSLETTER = "newsletter";
-
 export const validateEmail = (email) => {
 	return email.match(
 		/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

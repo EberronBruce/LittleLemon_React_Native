@@ -1,18 +1,10 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import PressableButton from "../components/PressableButton";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-	HIGHLIGHT_LIGHT_COLOR,
-	HIGHLIGHT_DARK_COLOR,
-	PRIMARY_YELLOW_COLOR,
-	SECONDARY_DARK_COLOR,
-	SECONDARY_LIGHT_COLOR,
-	LIGHT_GRAY_COLOR,
-    OFF_WHITE_COLOR,
-    KEY_IMAGE_URI
-} from "../utils";
+import { PRIMARY_YELLOW_COLOR, SECONDARY_DARK_COLOR, LIGHT_GRAY_COLOR, OFF_WHITE_COLOR, } from "../utils/colors";
+import { KEY_IMAGE_URI } from "../utils/storageKeys";
 
 
 
@@ -43,7 +35,7 @@ export default function AvatarContainer({firstName, lastName, imageUri, setImage
     useEffect(() => {
             const loadImageFromAsyncStorage = async () => {
                 try {
-                    const storedImageUri = await AsyncStorage.getItem("imageUri");
+                    const storedImageUri = await AsyncStorage.getItem(KEY_IMAGE_URI);
                     if (storedImageUri !== null) {
                         setImageUri(storedImageUri);
                     }

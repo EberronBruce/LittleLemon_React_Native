@@ -1,26 +1,17 @@
 import { React, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector, useDispatch } from 'react-redux';
 import { receiveImage } from "../state/actions";
-
-
-
-import {
-	SECONDARY_DARK_COLOR,
-	KEY_IMAGE_URI,
-	getAllAsyncStorageItems,
-	KEY_FIRST_NAME,
-	KEY_LAST_NAME,
-} from "../utils";
+import {SECONDARY_DARK_COLOR } from "../utils/colors"
+import {KEY_IMAGE_URI, KEY_FIRST_NAME, KEY_LAST_NAME,} from "../utils/storageKeys";
+import {getAllAsyncStorageItems} from "../utils/helpers";
 
 export default function ProfileButton() {
 	const imageURI = useSelector((state) => state.profile.imageUri)
 	const dispatch = useDispatch();
-	//const [imageUri, setImageUri] = useState(null);
-	const [firstName, setFirstName] = useState("Ben");
-	const [lastName, setLastName] = useState("John");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const navigation = useNavigation();
 
 	useEffect(() => {
@@ -29,32 +20,18 @@ export default function ProfileButton() {
 			.then((data) => {
 				setFirstName(data[KEY_FIRST_NAME] ?? "");
 				setLastName(data[KEY_LAST_NAME] ?? "");
-				//setImageUri(data[KEY_IMAGE_URI] ?? null);
 				dispatch(receiveImage(data[KEY_IMAGE_URI]));
 			})
 			.catch((error) => {
 				console.log("Error retrieving AsyncStorage items:", error);
-			});
-
-    
+			});  
 	}
-    
     , []);
-
-	const handleTest = () => {
-		console.log("---------------------------------------");
-		console.log("Test: ", imageURI);
-		console.log("---------------------------------------");
-	}
 
 	return (
 		<TouchableOpacity
 			style={styles.profileButton}
-			onPress={() => {
-				handleTest();
-
-				navigation.navigate("Profile");
-			}}
+			onPress={() => navigation.navigate("Profile")}
 		>
 			{imageURI ? (
 				<Image source={{ uri: imageURI }} style={styles.avatar} />
